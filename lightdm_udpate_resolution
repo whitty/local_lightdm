@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ -r /etc/default/local_lightdm ]; then
+    . /etc/default/local_lightdm
+fi
+
+if xrandr --output "$DISPLAY_NAME" 2>&1 | grep -q "output $DISPLAY_NAME not found"; then
+    echo Not output "$DISPLAY" not found.  Exitting,...
+    exit 1
+fi
+xrandr --output "$DISPLAY_NAME" --primary --mode "$DISPLAY_RESOLUTION"
+
